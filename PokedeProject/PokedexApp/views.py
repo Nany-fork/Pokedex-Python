@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http  import Http404
 import urllib.request
 import json
 from http import HTTPStatus
@@ -45,4 +46,5 @@ def index(request):
         return render(request, "main/index.html", data)
     except HTTPError as e:
         if e.code == 404:
+            raise Http404('this does not exist')
             return render(request, "main/404.html")
